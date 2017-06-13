@@ -3,22 +3,24 @@ from matrix import *
 from math import *
 from gmath import *
 import random
-
+'''
+def shade(matrix, i, color):
+    Iamb = ka*A
+    Idiff = kd     
+    Ispec = ks
+'''
 def lol(poly):
     return poly[1]
 
 def scanline_convert(polygons, i, screen, zbuffer):
     color = [random.randrange(256), random.randrange(256), random.randrange(256)]
+   # color = shade(polygons, i, color)
 
     a = polygons[i]
     b = polygons[i+1]
     c = polygons[i+2]
 
     sorted([a,b,c],key=lol)
-
-#    x=[a[0],b[0],c[0]]
- #   y=[a[1],b[1],c[1]]
-  #  z=[a[2],b[2],c[2]]
     
     ytop=sorted([a,b,c],key=lol)[2][1] 
     ybot=sorted([a,b,c],key=lol)[0][1]
@@ -36,7 +38,6 @@ def scanline_convert(polygons, i, screen, zbuffer):
         
         while y<ytop:
             draw_line(int(x0), int(y), 0, int(x1), int(y), int(0), screen, zbuffer, color)
-#            print str(x0)+" "+ str(x1)
             if y<ymid:
                 dx0 = float(xend-xstart)/float(ytop-ybot)
                 dx1 = float(xmid-xstart)/float(ymid-ybot)
@@ -55,7 +56,6 @@ def scanline_convert(polygons, i, screen, zbuffer):
         
         while y<ytop:
             draw_line(int(x0), int(y), 0, int(x1), int(y), int(0), screen, zbuffer, color)
- #           print str(x0)+" "+ str(x1)
             
             x0+=dx0
             x1+=dx1
@@ -72,7 +72,6 @@ def draw_polygons( matrix, screen, zbuffer, color ):
         return
 
     point = 0    
-#    color = [random.randrange(256), random.randrange(256), random.randrange(256)]
 
     while point < len(matrix) - 2:
 
